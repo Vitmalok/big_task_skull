@@ -5,14 +5,12 @@ int main() {
 	Image *image;
 	Image_open(&image, "images/skull_1.png", LCT_GREY);
 	
-	int x, y;
-	for (y=100; y<200; y++) {
-		for (x=150; x<400; x++) {
-			image->data[Image_xy_to_i(image, x, y)] = 128;
-		}
-	}
+	Image *image_blurred;
 	
-	Image_save(image, "images/skull_1_1.png");
+	gaussian_blur(&image_blurred, image, 3);
+	Image_save(image_blurred, "images/skull_1_blur.png");
+	Image_free(image_blurred);
+	
 	Image_free(image);
 	
 	return 0;
